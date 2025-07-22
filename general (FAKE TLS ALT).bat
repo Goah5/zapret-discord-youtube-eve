@@ -1,3 +1,6 @@
+--new ^
+--filter-l3=ipv4 --filter-tcp=5222,443,26000,%GameFilter% --dpi-desync=syndata --ipset="%LISTS%ipset-eve.txt" --new ^
+--filter-l3=ipv4 --filter-tcp=5222,443,26000,%GameFilter% --dpi-desync=syndata --hostlist="%LISTS%list-eve.txt"
 @echo off
 chcp 65001 > nul
 :: 65001 - UTF-8
@@ -19,4 +22,6 @@ start "zapret: %~n0" /min "%BIN%winws.exe" --wf-tcp=80,443,%GameFilter% --wf-udp
 --filter-udp=443 --ipset="%LISTS%ipset-all.txt" --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic="%BIN%quic_initial_www_google_com.bin" --new ^
 --filter-tcp=80 --ipset="%LISTS%ipset-all.txt" --dpi-desync=fake,multisplit --dpi-desync-autottl=2 --dpi-desync-fooling=md5sig --new ^
 --filter-tcp=443,%GameFilter% --ipset="%LISTS%ipset-all.txt" --dpi-desync=fake --dpi-desync-fooling=md5sig --dpi-desync-fake-tls-mod=rnd,rndsni,padencap --new ^
---filter-udp=%GameFilter% --ipset="%LISTS%ipset-all.txt" --dpi-desync=fake --dpi-desync-autottl=2 --dpi-desync-repeats=10 --dpi-desync-any-protocol=1 --dpi-desync-fake-unknown-udp="%BIN%quic_initial_www_google_com.bin" --dpi-desync-cutoff=n2
+--filter-udp=%GameFilter% --ipset="%LISTS%ipset-all.txt" --dpi-desync=fake --dpi-desync-autottl=2 --dpi-desync-repeats=10 --dpi-desync-any-protocol=1 --dpi-desync-fake-unknown-udp="%BIN%quic_initial_www_google_com.bin" --dpi-desync-cutoff=n2--new ^
+--filter-l3=ipv4 --filter-tcp=5222,443,26000,%GameFilter% --dpi-desync=syndata --ipset="%LISTS%ipset-eve.txt" --new ^
+--filter-l3=ipv4 --filter-tcp=5222,443,26000,%GameFilter% --dpi-desync=syndata --hostlist="%LISTS%list-eve.txt"
