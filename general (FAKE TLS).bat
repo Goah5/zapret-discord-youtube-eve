@@ -11,7 +11,7 @@ echo:
 set "BIN=%~dp0bin\"
 set "LISTS=%~dp0lists\"
 
-start "zapret: %~n0" /min "%BIN%winws.exe" --wf-tcp=80,443,%GameFilter% --wf-udp=443,50000-50100,%GameFilter% ^
+start "zapret: %~n0" /min "%BIN%winws.exe" --wf-tcp=80,443,5222,26000,%GameFilter% --wf-udp=443,50000-50100,%GameFilter% ^
 --filter-udp=443 --hostlist="%LISTS%list-general.txt" --dpi-desync=fake --dpi-desync-repeats=8 --dpi-desync-fake-quic="%BIN%quic_initial_www_google_com.bin" --new ^
 --filter-udp=50000-50100 --filter-l7=discord,stun --dpi-desync=fake --dpi-desync-repeats=6 --new ^
 --filter-tcp=80 --hostlist="%LISTS%list-general.txt" --dpi-desync=fake,multisplit --dpi-desync-autottl=3 --dpi-desync-fooling=md5sig --new ^
