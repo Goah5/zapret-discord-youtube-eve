@@ -1,5 +1,5 @@
 @echo off
-set "LOCAL_VERSION=1.8.0.eve.3"
+set "LOCAL_VERSION=1.8.2.eve.3"
 
 :: External commands
 if "%~1"=="status_zapret" (
@@ -63,7 +63,7 @@ goto menu
 :service_status
 cls
 chcp 437 > nul
-echo Checking services and tasks...
+for /f "tokens=2*" %%A in ('reg query "HKLM\System\CurrentControlSet\Services\zapret" /v zapret-discord-youtube 2^>nul') do echo Service strategy installed from "%%B"
 call :test_service zapret
 call :test_service WinDivert
 
@@ -240,6 +240,10 @@ sc delete %SRVCNAME% >nul 2>&1
 sc create %SRVCNAME% binPath= "\"%BIN_PATH%winws.exe\" %ARGS%" DisplayName= "zapret" start= auto
 sc description %SRVCNAME% "Zapret DPI bypass software"
 sc start %SRVCNAME%
+for %%F in ("!file%choice%!") do (
+    set "filename=%%~nF"
+)
+reg add "HKLM\System\CurrentControlSet\Services\zapret" /v zapret-discord-youtube /t REG_SZ /d "!filename!" /f
 
 pause
 goto menu
@@ -316,6 +320,16 @@ if !errorlevel!==0 (
     call :PrintRed "https://github.com/Goah5/zapret-discord-youtube-eve/issues/2512#issuecomment-2821119513"
 ) else (
     call :PrintGreen "Killer check passed"
+)
+echo:
+
+:: Intel Connectivity Network Service
+sc query | findstr /I "Intel" | findstr /I "Connectivity" | findstr /I "Network" > nul
+if !errorlevel!==0 (
+    call :PrintRed "[X] Intel Connectivity Network Service found. It conflicts with zapret"
+    call :PrintRed "https://github.com/ValdikSS/GoodbyeDPI/issues/541#issuecomment-2661670982"
+) else (
+    call :PrintGreen "Intel Connectivity check passed"
 )
 echo:
 
@@ -438,9 +452,11 @@ cls
 if not exist "%gameFlagFile%" (
     echo Enabling game filter...
     echo ENABLED > "%gameFlagFile%"
+    call :PrintYellow "Restart the zapret to apply the changes"
 ) else (
     echo Disabling game filter...
     del /f /q "%gameFlagFile%"
+    call :PrintYellow "Restart the zapret to apply the changes"
 )
 
 pause
