@@ -43,3 +43,10 @@ ffzap.com
 betterttv.net
 7tv.app
 7tv.io
+live.chat.eveonline.com
+binaries.eveonline.com
+singularity.servers.eveonline.com
+tranquility.servers.eveonline.com
+launcher.ccpgames.com
+login.eveonline.com
+launcher.eveonline.com
