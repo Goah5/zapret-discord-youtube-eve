@@ -295,9 +295,9 @@ chcp 437 > nul
 cls
 
 :: Set current version and URLs
-set "GITHUB_VERSION_URL=https://raw.githubusercontent.com/Flowseal/zapret-discord-youtube/main/.service/version.txt"
-set "GITHUB_RELEASE_URL=https://github.com/Flowseal/zapret-discord-youtube/releases/tag/"
-set "GITHUB_DOWNLOAD_URL=https://github.com/Flowseal/zapret-discord-youtube/releases/latest/download/zapret-discord-youtube-"
+set "GITHUB_VERSION_URL=https://raw.githubusercontent.com/Goah5/zapret-discord-youtube-eve/main/.service/version.txt"
+set "GITHUB_RELEASE_URL=https://github.com/Goah5/zapret-discord-youtube-eve/releases/tag/"
+set "GITHUB_DOWNLOAD_URL=https://github.com/Goah5/zapret-discord-youtube-eve/releases/latest/download/zapret-discord-youtube-"
 
 :: Get the latest version from GitHub
 for /f "delims=" %%A in ('powershell -command "(Invoke-WebRequest -Uri \"%GITHUB_VERSION_URL%\" -Headers @{\"Cache-Control\"=\"no-cache\"} -TimeoutSec 5).Content.Trim()" 2^>nul') do set "GITHUB_VERSION=%%A"
@@ -392,7 +392,7 @@ echo:
 tasklist /FI "IMAGENAME eq AdguardSvc.exe" | find /I "AdguardSvc.exe" > nul
 if !errorlevel!==0 (
     call :PrintRed "[X] Adguard process found. Adguard may cause problems with Discord"
-    call :PrintRed "https://github.com/Flowseal/zapret-discord-youtube/issues/417"
+    call :PrintRed "https://github.com/Goah5/zapret-discord-youtube-eve/issues/417"
 ) else (
     call :PrintGreen "Adguard check passed"
 )
@@ -402,7 +402,7 @@ echo:
 sc query | findstr /I "Killer" > nul
 if !errorlevel!==0 (
     call :PrintRed "[X] Killer services found. Killer conflicts with zapret"
-    call :PrintRed "https://github.com/Flowseal/zapret-discord-youtube/issues/2512#issuecomment-2821119513"
+    call :PrintRed "https://github.com/Goah5/zapret-discord-youtube-eve/issues/2512#issuecomment-2821119513"
 ) else (
     call :PrintGreen "Killer check passed"
 )
@@ -720,7 +720,7 @@ chcp 437 > nul
 cls
 
 set "listFile=%~dp0lists\ipset-all.txt"
-set "url=https://raw.githubusercontent.com/Flowseal/zapret-discord-youtube/refs/heads/main/.service/ipset-service.txt"
+set "url=https://raw.githubusercontent.com/Goah5/zapret-discord-youtube-eve/refs/heads/main/.service/ipset-service.txt"
 
 echo Updating ipset-all...
 
